@@ -1,0 +1,9 @@
+genotypename: ray.geno
+snpname: ray.snp
+indivname: ray.ind
+evecoutname: ray.evec
+evaloutname: ray.eval
+numoutevec: 10
+numthreads: 32
+outliermode: 0
+numoutlieriter: 0
