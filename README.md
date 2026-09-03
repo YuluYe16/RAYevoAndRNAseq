@@ -6,7 +6,7 @@ Concise command-line workflows used for genome evolution and RNA-seq analyses in
 
 - `01_genome_assembly_annotation`: HiFi genome assembly, quality assessment, repeat annotation, and gene annotation.
 - `02_genome_alignment_phylogeny`: whole-genome alignment, synteny visualization, orthology inference, and species-tree reconstruction.
-- `03_population_genetic_structure`: read mapping and filtering, ANGSD SNP analysis, PCA, and ADMIXTURE.
+- `03_population_genetic_structure`: read mapping and filtering, ANGSD SNP analysis, PCA, ADMIXTURE, nucleotide diversity（π）, and FST.
 - `04_gene_flow_demography`: Relate, TreeMix, Dsuite F-branch, and fastsimcoal2 workflows.
 - `05_transcriptome_analysis`: RNA-seq alignment, read counting, and OrA-tract overlap enrichment.
 
