@@ -25,3 +25,27 @@ Load_Current_Gene_Annotations.dbi -c ray.alignAssembly.update.config -g ray.geno
 
 # Update gene structures and UTRs using transcript evidence.
 Launch_PASA_pipeline.pl -c ray.annotCompare.config -A -g ray.genome.fa.masked -t ray_trinity/Trinity-GG.fasta --CPU 32
+
+
+# InterProScan
+interproscan.sh \
+    -i ray.protein.clean.fa \
+    -f tsv \
+    -dp \
+    --goterms \
+    --pathways \
+    -cpu 64 \
+    -o ray 
+
+# eggNOG-mapper 
+emapper.py \
+    -i ray.protein.fa \
+    --itype proteins \
+    -m diamond \
+    --data_dir emapperdb-5.0.2 \
+    --cpu 32 \
+    --output ray_eggnog \
+    --output_dir ./ \
+    --pfam_realign realign \
+    --tax_scope 33090 \
+    --override 
