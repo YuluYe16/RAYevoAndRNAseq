@@ -22,3 +22,30 @@ realSFS ray.saf.idx comparison.saf.idx -P 10 -fold 1 > ray_comparison.ml
 realSFS fst index ray.saf.idx comparison.saf.idx -sfs ray_comparison.ml -fold 1 -whichFst 1 -fstout ray_comparison
 realSFS fst stats ray_comparison.fst.idx > ray_comparison.global_fst.txt
 realSFS fst stats ray_comparison.fst.idx -win 100000 -step 100000 > ray_comparison.win100k_fst.txt
+
+# Calculate global and windowed FST between RAY and ARO.
+realSFS fst index ray.saf.idx aro.saf.idx \
+    -sfs ray_aro.ml -fold 1 -whichFst 1 \
+    -fstout ray_aro
+
+realSFS fst stats ray_aro.fst.idx \
+    > ray_aro.global_fst.txt
+
+realSFS fst stats2 ray_aro.fst.idx \
+    -win 100000 -step 50000 -type 0 \
+    > ray_aro.win100k_step50k.fst.txt
+
+# Retain windows with >=5,000 shared callable sites.
+# Identify candidate windows above the genome-wide 95th percentile.
+
+# Scan RAY (target) against ARO (reference) using filtered GATK genotypes.
+xpclr --format hdf5 \
+    --input "${CHR}.h5" \
+    --samplesA RAY.samples.txt \
+    --samplesB ARO.samples.txt \
+    --chr "${CHR}" \
+    --start 1 --stop "${CHR_LENGTH_PLUS1}" \
+    --size 100000 --step 50000 \
+    --rrate 4.5e-8 --ld 0.95 \
+    --minsnps 10 --maxsnps "${MAXSNPS}" \
+    --out "${CHR}.xpclr.tsv"
