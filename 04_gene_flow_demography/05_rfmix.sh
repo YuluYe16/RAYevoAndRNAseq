@@ -1,0 +1,1 @@
+rfmix -f "ray.${chromosome}.vcf.gz" -r "reference.${chromosome}.vcf.gz" -m ray.sample_map.tsv -g all_chromosomes.rfmix.tsv --chromosome="$chromosome" -o "ray.${chromosome}" --n-threads=4 --random-seed=2026 -G 8 -s 100 -c 20 -t 100 -e 0
