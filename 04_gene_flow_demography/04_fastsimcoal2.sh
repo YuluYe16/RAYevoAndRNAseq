@@ -7,10 +7,10 @@ tabix -p vcf ray.neutral.vcf.gz
 python3 easySFS.py -i ray.neutral.vcf.gz -p ray.sample_pop.tsv -a -f --preview
 
 # Generate a folded multidimensional SFS using the selected projections.
-python3 easySFS.py -i ray.neutral.vcf.gz -p ray.sample_pop.tsv -o ray_easySFS --prefix ray_proj8 -a -f --proj 8,8,8,8,8,8
+python3 easySFS.py -i ray.neutral.vcf.gz -p ray.sample_pop.tsv -o ray_easySFS --prefix ray_proj -a -f --proj 5,5,5,5,5
 
 # Run one fastsimcoal2 optimization; repeat this command in separate replicate directories.
-fsc28 --cores 8 --numBatches 12 -t ray.tpl -e ray.est --msfs --multiSFS -M -q -n 100000 -L 50 -s 0
+fsc28 --cores 8 --numBatches 12 -t ray.tpl -e ray.est --msfs --multiSFS -M -q -n 500000 -L 50 -s 0
 
 # Select the replicate with the highest estimated likelihood.
 python3 fsc_bestrun.py -i fsc_results/ray -o best_runs/ray
